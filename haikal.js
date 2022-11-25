@@ -992,8 +992,6 @@ templateButtons: [
 { quickReplyButton: { displayText: `HAIKAL`, id: `JAGOAN OM?`}},
 ]
  })
-  await sleep(10000* secon)
- }
  break
 //=================================================//
 case 'banghwbug3': case 'banghwcrash2': case 'crashar12': {
