@@ -5,7 +5,7 @@
 🌷 KALAU MAU RENAME TARO CREDITS GUA : banghw.☆ */
 
 require('./hwkal')
-const { default: makeWASocket, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
+const { default: haikalConnect, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
 const fs = require('fs')
 const pino = require('pino')
 const chalk = require('chalk')
@@ -29,13 +29,16 @@ const Store = require("./baseikal/lib/Store.js") //makeInMemoryStore({ logger: p
 //=================================================//
 //=================================================//
 async function startHaikal() {
-const haikal = makeWASocket({
+let { version, isLatest } = await fetchLatestBaileysVersion()
+const haikal = haikalConnect({
 logger: pino({ level: 'silent' }),
 printQRInTerminal: true,
-browser: ['⚚°banghw°⚚','Safari','1.0.0'],
-auth: state})
-//=================================================//
-store.bind(haikal.ev)
+browser: ['Haikal Multi Device','Safari','1.0.0'],
+auth: state,
+version
+})
+
+const store = Store.bind(haikal)
 //=================================================//
 haikal.ev.on('messages.upsert', async chatUpdate => {
 //console.log(JSON.stringify(chatUpdate, undefined, 2))
