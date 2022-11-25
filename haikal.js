@@ -43,6 +43,18 @@ const { iphone6 } = require('./baseikal/virtex/iphone6')
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom, getGroupAdmins } = require('./baseikal/lib/myfunc')
 const { FajarNews, BBCNews, metroNews, CNNNews, iNews, KumparanNews, TribunNews, DailyNews, DetikNews, OkezoneNews, CNBCNews, KompasNews, SindoNews, TempoNews, IndozoneNews, AntaraNews, RepublikaNews, VivaNews, KontanNews, MerdekaNews, KomikuSearch, AniPlanetSearch, KomikFoxSearch, KomikStationSearch, MangakuSearch, KiryuuSearch, KissMangaSearch, KlikMangaSearch, PalingMurah, LayarKaca21, AminoApps, Mangatoon, WAModsSearch, Emojis, CoronaInfo, JalanTikusMeme,Cerpen, Quotes, Couples, Darkjokes } = require("dhn-api");
 //=================================================//
+// Read Database
+global.db = JSON.parse(fs.readFileSync('./src/database.json'))
+if (global.db) global.db = {
+users: {},
+chats: {},
+database: {},
+game: {},
+settings: {},
+others: {},
+sticker: {},
+...(global.db || {})
+}
 //=================================================//
 virgam = fs.readFileSync(`./baseikal/image/deden.jpeg`)
 const content = JSON.stringify(m.message)
@@ -141,31 +153,31 @@ return haikal.sendMessage(m.chat, { text: teks, contextInfo:{"externalAdReply": 
 try {
 let isNumber = x => typeof x === 'number' && !isNaN(x)
 let limitUser = isPremium ? global.limitawal.premium : global.limitawal.free
-let user = global.db.data.users[m.sender]
-if (typeof user !== 'object') global.db.data.users[m.sender] = {}
+let user = global.db.users[m.sender]
+if (typeof user !== 'object') global.db.users[m.sender] = {}
 if (user) {
 if (!isNumber(user.afkTime)) user.afkTime = -1
 if (!('afkReason' in user)) user.afkReason = ''
 if (!isNumber(user.limit)) user.limit = limitUser
-} else global.db.data.users[m.sender] = {
+} else global.db.users[m.sender] = {
 afkTime: -1,
 afkReason: '',
 limit: limitUser,
 }
-let chats = global.db.data.chats[m.chat]
-if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
+let chats = global.db.chats[m.chat]
+if (typeof chats !== 'object') global.db.chats[m.chat] = {}
 if (chats) {
 if (!('mute' in chats)) chats.mute = false
-} else global.db.data.chats[m.chat] = {
+} else global.db.chats[m.chat] = {
 mute: false,
 }
-let settings = db.data.settings[botNumber]
-if (typeof settings !== 'object') db.data.settings[botNumber] = {}
+let settings = db.settings[botNumber]
+if (typeof settings !== 'object') db.settings[botNumber] = {}
 if (settings) {
 if (!('available' in settings)) settings.available = true
 if (!('composing' in settings)) settings.composing = false
 if (!('recording' in settings)) settings.recording = false
-} else db.data.settings[botNumber] = {
+} else db.settings[botNumber] = {
 available: true,
 composing: false,
 recording: false,
@@ -184,9 +196,9 @@ green(), 'from', chalk.green(pushname), 'in', chalk.green(groupName ? groupName 
 //=================================================// 
 let cron = require('node-cron')
 cron.schedule('00 12 * * *', () => {
-let user = Object.keys(global.db.data.users)
+let user = Object.keys(global.db.users)
 let limitUser = isPremium ? global.limitawal.premium : global.limitawal.free
-for (let jid of user) global.db.data.users[jid].limit = limitUser
+for (let jid of user) global.db.users[jid].limit = limitUser
 console.log('Reseted Limit')
 }, {
 scheduled: true,
@@ -232,9 +244,13 @@ await haikal.sendPresenceUpdate('composing', m.chat)
 if(autoavailable == true)
 await haikal.sendPresenceUpdate('available', m.chat)
 }
+// write database every 1 minute
+setInterval(() => {
+fs.writeFileSync('./src/database.json', JSON.stringify(global.db, null, 2))
+}, 60 * 1000)
 //=================================================//
 // Mute Chat
-if (db.data.chats[m.chat].mute && !isAdmins && !isCreator) {
+if (db.chats[m.chat].mute && !isAdmins && !isCreator) {
 return
 }
 //=================================================//
@@ -256,8 +272,8 @@ haikal.sendMessage(from, {text:`\`\`\`「 Detect Link 」\`\`\`\n\n@${kice.split
 }
 //=================================================//
 // Respon Cmd with media
-if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
-let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
+if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.sticker)) {
+let hash = global.db.sticker[m.msg.fileSha256.toString('base64')]
 let { text, mentionedJid } = hash
 let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {
 userJid: haikal.user.id,
@@ -287,7 +303,7 @@ m.reply(e)
 //=================================================//
 let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
 for (let jid of mentionUser) {
-let user = global.db.data.users[jid]
+let user = global.db.users[jid]
 if (!user) continue
 let afkTime = user.afkTime
 if (!afkTime || afkTime < 0) continue
@@ -297,8 +313,8 @@ Apakah Ada Yang Ingin Di Tanyakan ${reason ? 'Ada Yang Bisa Saya Bantu? ' + reas
 Waktu ${clockString(new Date - afkTime)}
 `.trim())
 }
-if (db.data.users[m.sender].afkTime > -1) {
-let user = global.db.data.users[m.sender]
+if (db.users[m.sender].afkTime > -1) {
+let user = global.db.users[m.sender]
 m.reply(`
 Hello Saya Bot Hw Mods${user.afkReason ? ' Baiklah ' + user.afkReason : ''}
 Selama ${clockString(new Date - user.afkTime)}
@@ -1459,7 +1475,7 @@ break
 //=================================================//
 case 'afk': {
 if (isBan) throw sticBanLu(from)
-let user = global.db.data.users[m.sender]
+let user = global.db.users[m.sender]
 user.afkTime = + new Date
 user.afkReason = text
 m.reply(`${m.pushName} Hello Saya Bot Hw Mods${text ? ': ' + text : ''}`)
@@ -2918,7 +2934,7 @@ break
 //=================================================//
 case 'style': case 'styletext': {
 if (isBan) throw sticBanLu(from) // respon ketika limit habis
-db.data.users[m.sender].limit -= 1 // -1 limit
+db.users[m.sender].limit -= 1 // -1 limit
 let { styletext } = require('./baseikal/lib/scraper')
 if (!text) throw 'Masukkan Query text!'
 let anu = await styletext(text)
@@ -2978,12 +2994,12 @@ if (!m.isGroup) throw groupon(from)
 if (!isBotAdmins) throw SiGroupadmin(from)
 if (!isAdmins) throw sticAdmin(from)
 if (args[0] === "on") {
-if (db.data.chats[m.chat].mute) return m.reply(`Sudah Aktif Sebelumnya`)
-db.data.chats[m.chat].mute = true
+if (db.chats[m.chat].mute) return m.reply(`Sudah Aktif Sebelumnya`)
+db.chats[m.chat].mute = true
 m.reply(`${haikal.user.name} telah di mute di group ini !`)
 } else if (args[0] === "off") {
-if (!db.data.chats[m.chat].mute) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
-db.data.chats[m.chat].mute = false
+if (!db.chats[m.chat].mute) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
+db.chats[m.chat].mute = false
 m.reply(`${haikal.user.name} telah di unmute di group ini !`)
 } else {
  const anaku = {
@@ -4114,8 +4130,8 @@ if (!m.quoted) throw 'Reply Pesan!'
 if (!m.quoted.fileSha256) throw 'SHA256 Hash Missing'
 if (!text) throw `Untuk Command Apa?`
 let hash = m.quoted.fileSha256.toString('base64')
-if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) throw 'You have no permission to change this sticker command'
-global.db.data.sticker[hash] = {
+if (global.db.sticker[hash] && global.db.sticker[hash].locked) throw 'You have no permission to change this sticker command'
+global.db.sticker[hash] = {
 text,
 mentionedJid: m.mentionedJid,
 creator: m.sender,
@@ -4131,8 +4147,8 @@ if (!isCreator) return
 if (isBan) throw sticBanLu(from)
 let hash = m.quoted.fileSha256.toString('base64')
 if (!hash) throw `Tidak ada hash`
-if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) throw 'You have no permission to delete this sticker command'
-delete global.db.data.sticker[hash]
+if (global.db.sticker[hash] && global.db.sticker[hash].locked) throw 'You have no permission to delete this sticker command'
+delete global.db.sticker[hash]
 reply(`Done!`)
 }
 break
@@ -4143,9 +4159,9 @@ if (isBan) throw sticBanLu(from)
 let teks = `
 *List Hash*
 Info: *bold* hash is Locked
-${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}
+${Object.entries(global.db.sticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}
 `.trim()
-haikal.sendText(m.chat, teks, m, { mentions: Object.values(global.db.data.sticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })
+haikal.sendText(m.chat, teks, m, { mentions: Object.values(global.db.sticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })
 }
 break
 //=================================================//
@@ -4155,8 +4171,8 @@ if (isBan) throw sticBanLu(from)
 if (!m.quoted) throw 'Reply Pesan!'
 if (!m.quoted.fileSha256) throw 'SHA256 Hash Missing'
 let hash = m.quoted.fileSha256.toString('base64')
-if (!(hash in global.db.data.sticker)) throw 'Hash not found in database'
-global.db.data.sticker[hash].locked = !/^un/i.test(command)
+if (!(hash in global.db.sticker)) throw 'Hash not found in database'
+global.db.sticker[hash].locked = !/^un/i.test(command)
 reply('Done!')
 }
 break
@@ -5606,7 +5622,7 @@ if (stdout) return m.reply(stdout)})}
 if (isCmd && budy.toLowerCase() != undefined) {
 if (m.chat.endsWith('broadcast')) return
 if (m.isBaileys) return
-let msgs = global.db.data.database
+let msgs = global.db.database
 if (!(budy.toLowerCase() in msgs)) return
 haikal.copyNForward(m.chat, msgs[budy.toLowerCase()], true)}}
 } catch (err) {
