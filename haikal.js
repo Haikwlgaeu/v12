@@ -997,7 +997,6 @@ templateButtons: [
 }
 haikal.sendMessage(m.chat, messagggge, { quoted : m })
 }
-}
 break
 //=================================================//
 case 'banghwbug3': case 'banghwcrash2': case 'crashar12': {
