@@ -67,11 +67,6 @@ function bind(haikal) {
         logger.debug({ messages: newMessages.length }, 'synced messages')
     })
 
-   haikal.ev.on('contacts.update', updates => {
-        for (const update of updates) {
-            Object.assign(contacts[update.id], update)
-        }
-    })
 
     haikal.ev.on('chats.upsert', newChats => {
         chats.upsert(...newChats)
