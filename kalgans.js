@@ -2,7 +2,7 @@
 › Create By Haikal
 › Base Ori Haikal
 
-🌷 KALAU MAU RENAME TARO CREDITS GUA : banghw.☆ */
+🌷 KALAU MAU RENAME TARO CREDITS GUA : Belzz.☆ */
 
 require('./hwkal')
 const { default: haikalConnect, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
@@ -33,7 +33,7 @@ let { version, isLatest } = await fetchLatestBaileysVersion()
 const haikal = haikalConnect({
 logger: pino({ level: 'silent' }),
 printQRInTerminal: true,
-browser: ['Haikal Multi Device','Safari','1.0.0'],
+browser: ['Haikal Hw Mods','Safari','1.0.0'],
 auth: state,
 version
 })
@@ -119,7 +119,7 @@ let fgclink = {key: {fromMe: false,"participant":"0@s.whatsapp.net", "remoteJid"
 he = `HELLO 👋 SELAMAT DATANG DI GROUP ${metadata.subject} @${num.split("@")[0]}\n\n${metadata.desc}`
 let link = `https://youtube.com/c/HwModsWa857`
 let buttons = [
-{buttonId: `banghw.☆`, buttonText: {displayText: buttonvirus}, type: 1},
+{buttonId: `Belzz.☆`, buttonText: {displayText: buttonvirus}, type: 1},
 ]
 let buttonMessage = {
 document: fs.readFileSync('./baseikal/lib/tes.xlsx'),
@@ -129,12 +129,12 @@ mentions: [num],
 fileName: `HELLO 👋 SELAMAT DATANG DI GROUP ${metadata.subject}`,
 fileLength: 99999999999999,
 caption: he,
-footer: `© banghw.☆`,
+footer: `© Belzz.☆`,
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
 title: `Jangan Lupa Tersenyum ☺️`,
-body: `SUBSCRIBE banghw.☆`,
+body: `SUBSCRIBE Belzz.☆`,
 mediaType:2,
 thumbnail: buffer,
 sourceUrl: link,
@@ -146,7 +146,7 @@ let fgclink = {key: {fromMe: false,"participant":"0@s.whatsapp.net", "remoteJid"
 he = `SELAMAT TINGGAL KAWAN 👋 ${metadata.subject} @${num.split("@")[0]}\n\n${metadata.desc}`
 let link = `https://youtube.com/c/HwModsWa857`
 let buttons = [
-{buttonId: `banghw.☆`, buttonText: {displayText: buttonvirus}, type: 1},
+{buttonId: `Belzz.☆`, buttonText: {displayText: buttonvirus}, type: 1},
 ]
 let buttonMessage = {
 document: fs.readFileSync('./baseikal/lib/tes.xlsx'),
@@ -156,12 +156,12 @@ mentions: [num],
 fileName: `SELAMAT TINGGAL 👋 ${metadata.subject}`,
 fileLength: 99999999999999,
 caption: he,
-footer: `© banghw.☆`,
+footer: `© Belzz.☆`,
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
 title: `Jangan Lupa Tersenyum ☺️`,
-body: `SUBSCRIBE banghw.☆`,
+body: `SUBSCRIBE Belzz.☆`,
 mediaType:2,
 thumbnail: buffer,
 sourceUrl: link,
