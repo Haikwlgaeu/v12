@@ -570,7 +570,7 @@ haikal.relayMessage(m.chat, { requestPaymentMessage: { Message: { extendedTextMe
 mimetype: 'audio/mpeg', caption: `🔥 ${teks} ${buttonkal}`,
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}}}}, { quoted:doc})
 }
@@ -1309,7 +1309,7 @@ haikal.relayMessage(m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.
 mimetype: 'audio/mpeg', caption: `${buttonkal}`,
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}}}}, { quoted:doc})
 }
@@ -1325,7 +1325,7 @@ haikal.relayMessage(m.chat, { requestPaymentMessage: { Message: { extendedTextMe
 mimetype: 'audio/mpeg', caption: `${buttonkal}`,
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}}}}, { quoted: m})
 }
@@ -2564,7 +2564,7 @@ break
 //=================================================//
 case 'sc': {
 if (isBan) throw sticBanLu(from)
-reply('SC SLEMEKK NI BOS')
+reply('SC FARIS NI BOS')
 }
 break
 //=================================================//
@@ -4185,7 +4185,7 @@ case 'public': {
 if (!isCreator) return
 if (isBan) throw sticBanLu(from)
 haikal.public = true
-reply('Sukse Change To Public')
+reply('SUKSES PUBLIC BOT FARIS')
 }
 break
 //=================================================//
@@ -4193,7 +4193,7 @@ case 'self': {
 if (!isCreator) return
 if (isBan) throw sticBanLu(from)
 haikal.public = false
-reply('Sukses Change To Self')
+reply('SUKSES PRIVATE BOT FARIS')
 }
 break
 //=================================================//
@@ -4607,7 +4607,7 @@ haikal.sendMessage(m.chat, { image: kalimage, caption: `◎ © Hay Kak ${pushnam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5006,7 +5006,7 @@ contextInfo:{"externalAdReply": {"title": `SC Bot_faris`,"body": `Selamat ${sala
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5065,7 +5065,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5101,7 +5101,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5146,7 +5146,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5165,7 +5165,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5195,7 +5195,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5234,7 +5234,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5260,7 +5260,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5275,7 +5275,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5296,7 +5296,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5329,7 +5329,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5348,7 +5348,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5364,7 +5364,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5400,7 +5400,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5438,7 +5438,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
@@ -5615,7 +5615,7 @@ contextInfo:{"externalAdReply": {"title": `SC © faris`,"body": `Selamat ${salam
 previewType: "PHOTO",
 showAdAttribution: true,
 sourceUrl: `https://youtube.com/c/HwModsWa857`,
-thumbnailUrl: 'https://telegra.ph/file/a5e229afeb4dad4f35204.jpg', 
+thumbnailUrl: 'https://telegra.ph/file/a025b01cfc02479ae8cd8.jpg', 
 }
 }}, { quoted:m})
 }
