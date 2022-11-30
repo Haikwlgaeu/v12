@@ -43,6 +43,20 @@ const { iphone6 } = require('./baseikal/virtex/iphone6')
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom, getGroupAdmins } = require('./baseikal/lib/myfunc')
 const { FajarNews, BBCNews, metroNews, CNNNews, iNews, KumparanNews, TribunNews, DailyNews, DetikNews, OkezoneNews, CNBCNews, KompasNews, SindoNews, TempoNews, IndozoneNews, AntaraNews, RepublikaNews, VivaNews, KontanNews, MerdekaNews, KomikuSearch, AniPlanetSearch, KomikFoxSearch, KomikStationSearch, MangakuSearch, KiryuuSearch, KissMangaSearch, KlikMangaSearch, PalingMurah, LayarKaca21, AminoApps, Mangatoon, WAModsSearch, Emojis, CoronaInfo, JalanTikusMeme,Cerpen, Quotes, Couples, Darkjokes } = require("dhn-api");
 //=================================================//
+
+virgam = fs.readFileSync(`./baseikal/image/deden.jpeg`)
+const content = JSON.stringify(m.message)
+/*const cerpen = require('./baseikal/lib/cerpen')*/
+const kalimage = fs.readFileSync ('./baseikal/image/hwmodsgans.jpg')
+const thumbnail = fs.readFileSync ('./baseikal/image/mamak.jpg')
+const { mediafireDl } = require('./baseikal/lib/mediafire.js')
+const banned = JSON.parse(fs.readFileSync('./baseikal/dbnye/banned.json'))
+const ntilink = JSON.parse(fs.readFileSync("./baseikal/lib/antilink.json"))
+const time = moment(Date.now()).tz('Asia/Jakarta').locale('id').format('HH:mm:ss z')
+const wita = moment(Date.now()).tz('Asia/Makassar').locale('id').format('HH:mm:ss z')
+const wit = moment(Date.now()).tz('Asia/Jayapura').locale('id').format('HH:mm:ss z')
+const salam = moment(Date.now()).tz('Asia/Jakarta').locale('id').format('a')
+const qtod = m.quoted? "true":"false"
 let picaks = [flaming,fluming,flarun,flasmurf]
 let picak = picaks[Math.floor(Math.random() * picaks.length)]
 //=================================================//
