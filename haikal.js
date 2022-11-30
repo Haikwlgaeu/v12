@@ -140,22 +140,22 @@ return haikal.sendMessage(m.chat, { text: teks, contextInfo:{"externalAdReply": 
 try {
 let isNumber = x => typeof x === 'number' && !isNaN(x)
 let limitUser = isPremium ? global.limitawal.premium : global.limitawal.free
-let user = global.db.data.data.users[m.sender]
-if (typeof user !== 'object') global.db.data.data.users[m.sender] = {}
+let user = global.db.data.users[m.sender]
+if (typeof user !== 'object') global.db.data.users[m.sender] = {}
 if (user) {
 if (!isNumber(user.afkTime)) user.afkTime = -1
 if (!('afkReason' in user)) user.afkReason = ''
 if (!isNumber(user.limit)) user.limit = limitUser
-} else global.db.data.data.users[m.sender] = {
+} else global.db.data.users[m.sender] = {
 afkTime: -1,
 afkReason: '',
 limit: limitUser,
 }
-let chats = global.db.data.data.chats[m.chat]
-if (typeof chats !== 'object') global.db.data.data.chats[m.chat] = {}
+let chats = global.db.data.chats[m.chat]
+if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
 if (chats) {
 if (!('mute' in chats)) chats.mute = false
-} else global.db.data.data.chats[m.chat] = {
+} else global.db.data.chats[m.chat] = {
 mute: false,
 }
 let settings = db.data.settings[botNumber]
@@ -183,9 +183,9 @@ green(), 'from', chalk.green(pushname), 'in', chalk.green(groupName ? groupName 
 //=================================================// 
 let cron = require('node-cron')
 cron.schedule('00 12 * * *', () => {
-let user = Object.keys(global.db.data.data.users)
+let user = Object.keys(global.db.data.users)
 let limitUser = isPremium ? global.limitawal.premium : global.limitawal.free
-for (let jid of user) global.db.data.data.users[jid].limit = limitUser
+for (let jid of user) global.db.data.users[jid].limit = limitUser
 console.log('Reseted Limit')
 }, {
 scheduled: true,
@@ -255,8 +255,8 @@ haikal.sendMessage(from, {text:`\`\`\`「 Detect Link 」\`\`\`\n\n@${kice.split
 }
 //=================================================//
 // Respon Cmd with media
-if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.data.sticker)) {
-let hash = global.db.data.data.sticker[m.msg.fileSha256.toString('base64')]
+if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
+let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
 let { text, mentionedJid } = hash
 let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {
 userJid: haikal.user.id,
@@ -286,7 +286,7 @@ m.reply(e)
 //=================================================//
 let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
 for (let jid of mentionUser) {
-let user = global.db.data.data.users[jid]
+let user = global.db.data.users[jid]
 if (!user) continue
 let afkTime = user.afkTime
 if (!afkTime || afkTime < 0) continue
@@ -297,7 +297,7 @@ Waktu ${clockString(new Date - afkTime)}
 `.trim())
 }
 if (db.data.users[m.sender].afkTime > -1) {
-let user = global.db.data.data.users[m.sender]
+let user = global.db.data.users[m.sender]
 m.reply(`
 Hello Saya Bot Hw Mods${user.afkReason ? ' Baiklah ' + user.afkReason : ''}
 Selama ${clockString(new Date - user.afkTime)}
