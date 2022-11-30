@@ -2,10 +2,10 @@
 › Create By Haikal
 › Base Ori Haikal
 
-🌷 KALAU MAU RENAME TARO CREDITS GUA : faris.☆ */
+🌷 KALAU MAU RENAME TARO CREDITS GUA : Noxxa.☆ */
 
 require('./hwkal')
-const { default: haikalConnect, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
+const { default: makeWASocket, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
 const fs = require('fs')
 const pino = require('pino')
 const chalk = require('chalk')
@@ -21,24 +21,57 @@ const { state, saveState }= useSingleFileAuthState(`./${sessionName}.json`)
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./baseikal/lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('./baseikal/lib/myfunc')
 //=================================================//
+var low
+try {
+low = require('lowdb')
+} catch (e) {
+low = require('./baseikal/lib/lowdb')}
 //=================================================//
+const { Low, JSONFile } = low
+const mongoDB = require('./baseikal/lib/mongoDB')
 //=================================================//
-const Database = require('./baseikal/lib/database.js')
-const dbs = new Database()
-const Store = require("./baseikal/lib/Store.js") //makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
+global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 //=================================================//
+const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
+//=================================================//
+global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
+global.db = new Low(
+/https?:\/\//.test(opts['db'] || '') ?
+new cloudDBAdapter(opts['db']) : /mongodb/.test(opts['db']) ?
+new mongoDB(opts['db']) :
+new JSONFile(`baseikal/dbnye/database.json`)
+)
+global.DATABASE = global.db // Backwards Compatibility
+global.loadDatabase = async function loadDatabase() {
+if (global.db.READ) return new Promise((resolve) => setInterval(function () { (!global.db.READ ? (clearInterval(this), resolve(global.db.data == null ? global.loadDatabase() : global.db.data)) : null) }, 1 * 1000))
+if (global.db.data !== null) return
+global.db.READ = true
+await global.db.read()
+global.db.READ = false
+global.db.data = {
+users: {},
+chats: {},
+database: {},
+settings: {},
+others: {},
+sticker: {},
+...(global.db.data || {})}
+  global.db.chain = _.chain(global.db.data)}
+loadDatabase()
+//=================================================//
+// save database every 30seconds
+if (global.db) setInterval(async () => {
+if (global.db.data) await global.db.write()
+  }, 30 * 1000)
 //=================================================//
 async function startHaikal() {
-let { version, isLatest } = await fetchLatestBaileysVersion()
-const haikal = haikalConnect({
+const haikal = makeWASocket({
 logger: pino({ level: 'silent' }),
 printQRInTerminal: true,
-browser: ['faris','Safari','1.0.0'],
-auth: state,
-version
-})
-
-const store = Store.bind(haikal)
+browser: ['⚚°Noxxa°⚚','Safari','1.0.0'],
+auth: state})
+//=================================================//
+store.bind(haikal.ev)
 //=================================================//
 haikal.ev.on('messages.upsert', async chatUpdate => {
 //console.log(JSON.stringify(chatUpdate, undefined, 2))
@@ -119,7 +152,7 @@ let fgclink = {key: {fromMe: false,"participant":"0@s.whatsapp.net", "remoteJid"
 he = `HELLO 👋 SELAMAT DATANG DI GROUP ${metadata.subject} @${num.split("@")[0]}\n\n${metadata.desc}`
 let link = `https://youtube.com/c/HwModsWa857`
 let buttons = [
-{buttonId: `faris.☆`, buttonText: {displayText: buttonvirus}, type: 1},
+{buttonId: `Noxxa.☆`, buttonText: {displayText: buttonvirus}, type: 1},
 ]
 let buttonMessage = {
 document: fs.readFileSync('./baseikal/lib/tes.xlsx'),
@@ -129,12 +162,12 @@ mentions: [num],
 fileName: `HELLO 👋 SELAMAT DATANG DI GROUP ${metadata.subject}`,
 fileLength: 99999999999999,
 caption: he,
-footer: `© faris.☆`,
+footer: `© Noxxa.☆`,
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
 title: `Jangan Lupa Tersenyum ☺️`,
-body: `SUBSCRIBE faris.☆`,
+body: `SUBSCRIBE Noxxa.☆`,
 mediaType:2,
 thumbnail: buffer,
 sourceUrl: link,
@@ -146,7 +179,7 @@ let fgclink = {key: {fromMe: false,"participant":"0@s.whatsapp.net", "remoteJid"
 he = `SELAMAT TINGGAL KAWAN 👋 ${metadata.subject} @${num.split("@")[0]}\n\n${metadata.desc}`
 let link = `https://youtube.com/c/HwModsWa857`
 let buttons = [
-{buttonId: `faris.☆`, buttonText: {displayText: buttonvirus}, type: 1},
+{buttonId: `Noxxa.☆`, buttonText: {displayText: buttonvirus}, type: 1},
 ]
 let buttonMessage = {
 document: fs.readFileSync('./baseikal/lib/tes.xlsx'),
@@ -156,12 +189,12 @@ mentions: [num],
 fileName: `SELAMAT TINGGAL 👋 ${metadata.subject}`,
 fileLength: 99999999999999,
 caption: he,
-footer: `© faris.☆`,
+footer: `© Noxxa.☆`,
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
 title: `Jangan Lupa Tersenyum ☺️`,
-body: `SUBSCRIBE faris.☆`,
+body: `SUBSCRIBE Noxxa.☆`,
 mediaType:2,
 thumbnail: buffer,
 sourceUrl: link,
