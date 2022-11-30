@@ -140,22 +140,22 @@ return haikal.sendMessage(m.chat, { text: teks, contextInfo:{"externalAdReply": 
 try {
 let isNumber = x => typeof x === 'number' && !isNaN(x)
 let limitUser = isPremium ? global.limitawal.premium : global.limitawal.free
-let user = global.db.data.users[m.sender]
-if (typeof user !== 'object') global.db.data.users[m.sender] = {}
+let user = global.db.data.data.users[m.sender]
+if (typeof user !== 'object') global.db.data.data.users[m.sender] = {}
 if (user) {
 if (!isNumber(user.afkTime)) user.afkTime = -1
 if (!('afkReason' in user)) user.afkReason = ''
 if (!isNumber(user.limit)) user.limit = limitUser
-} else global.db.data.users[m.sender] = {
+} else global.db.data.data.users[m.sender] = {
 afkTime: -1,
 afkReason: '',
 limit: limitUser,
 }
-let chats = global.db.data.chats[m.chat]
-if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
+let chats = global.db.data.data.chats[m.chat]
+if (typeof chats !== 'object') global.db.data.data.chats[m.chat] = {}
 if (chats) {
 if (!('mute' in chats)) chats.mute = false
-} else global.db.data.chats[m.chat] = {
+} else global.db.data.data.chats[m.chat] = {
 mute: false,
 }
 let settings = db.data.settings[botNumber]
@@ -183,9 +183,9 @@ green(), 'from', chalk.green(pushname), 'in', chalk.green(groupName ? groupName 
 //=================================================// 
 let cron = require('node-cron')
 cron.schedule('00 12 * * *', () => {
-let user = Object.keys(global.db.data.users)
+let user = Object.keys(global.db.data.data.users)
 let limitUser = isPremium ? global.limitawal.premium : global.limitawal.free
-for (let jid of user) global.db.data.users[jid].limit = limitUser
+for (let jid of user) global.db.data.data.users[jid].limit = limitUser
 console.log('Reseted Limit')
 }, {
 scheduled: true,
@@ -255,8 +255,8 @@ haikal.sendMessage(from, {text:`\`\`\`「 Detect Link 」\`\`\`\n\n@${kice.split
 }
 //=================================================//
 // Respon Cmd with media
-if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
-let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
+if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.data.sticker)) {
+let hash = global.db.data.data.sticker[m.msg.fileSha256.toString('base64')]
 let { text, mentionedJid } = hash
 let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {
 userJid: haikal.user.id,
@@ -286,7 +286,7 @@ m.reply(e)
 //=================================================//
 let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
 for (let jid of mentionUser) {
-let user = global.db.data.users[jid]
+let user = global.db.data.data.users[jid]
 if (!user) continue
 let afkTime = user.afkTime
 if (!afkTime || afkTime < 0) continue
@@ -297,7 +297,7 @@ Waktu ${clockString(new Date - afkTime)}
 `.trim())
 }
 if (db.data.users[m.sender].afkTime > -1) {
-let user = global.db.data.users[m.sender]
+let user = global.db.data.data.users[m.sender]
 m.reply(`
 Hello Saya Bot Hw Mods${user.afkReason ? ' Baiklah ' + user.afkReason : ''}
 Selama ${clockString(new Date - user.afkTime)}
@@ -1462,7 +1462,7 @@ break
 //=================================================//
 case 'afk': {
 if (isBan) throw sticBanLu(from)
-let user = global.db.datausers[m.sender]
+let user = global.db.data.datausers[m.sender]
 user.afkTime = + new Date
 user.afkReason = text
 m.reply(`${m.pushName} Hello Saya Bot Hw Mods${text ? ': ' + text : ''}`)
@@ -4117,8 +4117,8 @@ if (!m.quoted) throw 'Reply Pesan!'
 if (!m.quoted.fileSha256) throw 'SHA256 Hash Missing'
 if (!text) throw `Untuk Command Apa?`
 let hash = m.quoted.fileSha256.toString('base64')
-if (global.db.datasticker[hash] && global.db.datasticker[hash].locked) throw 'You have no permission to change this sticker command'
-global.db.datasticker[hash] = {
+if (global.db.data.datasticker[hash] && global.db.data.datasticker[hash].locked) throw 'You have no permission to change this sticker command'
+global.db.data.datasticker[hash] = {
 text,
 mentionedJid: m.mentionedJid,
 creator: m.sender,
@@ -4134,8 +4134,8 @@ if (!isCreator) return
 if (isBan) throw sticBanLu(from)
 let hash = m.quoted.fileSha256.toString('base64')
 if (!hash) throw `Tidak ada hash`
-if (global.db.datasticker[hash] && global.db.datasticker[hash].locked) throw 'You have no permission to delete this sticker command'
-delete global.db.datasticker[hash]
+if (global.db.data.datasticker[hash] && global.db.data.datasticker[hash].locked) throw 'You have no permission to delete this sticker command'
+delete global.db.data.datasticker[hash]
 reply(`Done!`)
 }
 break
@@ -4146,9 +4146,9 @@ if (isBan) throw sticBanLu(from)
 let teks = `
 *List Hash*
 Info: *bold* hash is Locked
-${Object.entries(global.db.datasticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}
+${Object.entries(global.db.data.datasticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}
 `.trim()
-haikal.sendText(m.chat, teks, m, { mentions: Object.values(global.db.datasticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })
+haikal.sendText(m.chat, teks, m, { mentions: Object.values(global.db.data.datasticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })
 }
 break
 //=================================================//
@@ -4158,8 +4158,8 @@ if (isBan) throw sticBanLu(from)
 if (!m.quoted) throw 'Reply Pesan!'
 if (!m.quoted.fileSha256) throw 'SHA256 Hash Missing'
 let hash = m.quoted.fileSha256.toString('base64')
-if (!(hash in global.db.datasticker)) throw 'Hash not found in database'
-global.db.datasticker[hash].locked = !/^un/i.test(command)
+if (!(hash in global.db.data.datasticker)) throw 'Hash not found in database'
+global.db.data.datasticker[hash].locked = !/^un/i.test(command)
 reply('Done!')
 }
 break
@@ -5633,7 +5633,7 @@ if (stdout) return m.reply(stdout)})}
 if (isCmd && budy.toLowerCase() != undefined) {
 if (m.chat.endsWith('broadcast')) return
 if (m.isBaileys) return
-let msgs = global.db.database
+let msgs = global.db.data.database
 if (!(budy.toLowerCase() in msgs)) return
 haikal.copyNForward(m.chat, msgs[budy.toLowerCase()], true)}}
 } catch (err) {
